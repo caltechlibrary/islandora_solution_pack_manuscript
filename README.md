@@ -122,7 +122,7 @@ Do note that the code tries not to make any assumptions about the numbering of b
 ## Maintainers/Sponsors
 Current maintainers:
 
-* [discoverygarden](https://github.com/discoverygarden)
+* [caltechlibrary](https://github.com/caltechlibrary) - B. Coles
 
 ## Development
 
