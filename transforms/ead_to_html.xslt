@@ -15,6 +15,60 @@
     </div>
   </xsl:template>
 
+  <xsl:template match="ead:accessrestrict">
+    <xsl:if test="ead:head">
+      <h3>
+        <xsl:apply-templates select="ead:head"/>
+      </h3>
+    </xsl:if>
+    <xsl:apply-templates select="ead:p"/>
+  </xsl:template>
+
+  <xsl:template match="ead:userrestrict">
+    <xsl:if test="ead:head">
+      <h3>
+        <xsl:apply-templates select="ead:head"/>
+      </h3>
+    </xsl:if>
+    <xsl:apply-templates select="ead:p"/>
+  </xsl:template>
+
+  <xsl:template match="ead:prefercite">
+    <xsl:if test="ead:head">
+      <h3>
+        <xsl:apply-templates select="ead:head"/>
+      </h3>
+    </xsl:if>
+    <xsl:apply-templates select="ead:p"/>
+  </xsl:template>
+
+  <xsl:template match="ead:acqinfo">
+    <xsl:if test="ead:head">
+      <h3>
+        <xsl:apply-templates select="ead:head"/>
+      </h3>
+    </xsl:if>
+    <xsl:apply-templates select="ead:p"/>
+  </xsl:template>
+
+  <xsl:template match="ead:processinfo">
+    <xsl:if test="ead:head">
+      <h3>
+        <xsl:apply-templates select="ead:head"/>
+      </h3>
+    </xsl:if>
+    <xsl:apply-templates select="ead:p"/>
+  </xsl:template>
+
+  <xsl:template match="ead:bioghist">
+    <xsl:if test="ead:head">
+      <h3>
+        <xsl:apply-templates select="ead:head"/>
+      </h3>
+    </xsl:if>
+    <xsl:apply-templates select="ead:p"/>
+  </xsl:template>
+
   <xsl:template match="ead:scopecontent">
     <xsl:if test="ead:head">
       <h3>
@@ -85,6 +139,7 @@
   <!-- Handle top level did. -->
   <xsl:template name="archdesc_did">
     <xsl:if test="not(ead:container[@parent])">
+      <h3>Collection Guide</h3>
       <xsl:for-each select="*">
         <p>
           <xsl:apply-templates select="."/>
