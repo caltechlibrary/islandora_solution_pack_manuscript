@@ -11,6 +11,7 @@
 
   <xsl:template match="/">
     <div class="ead">
+      <h3>Collection Guide</h3>
       <xsl:apply-templates select="//ead:archdesc"/>
     </div>
   </xsl:template>
@@ -24,7 +25,7 @@
     <xsl:apply-templates select="ead:p"/>
   </xsl:template>
 
-  <xsl:template match="ead:userrestrict">
+  <xsl:template match="ead:userestrict">
     <xsl:if test="ead:head">
       <h3>
         <xsl:apply-templates select="ead:head"/>
@@ -78,7 +79,17 @@
     <xsl:apply-templates select="ead:p"/>
   </xsl:template>
 
-  <xsl:template match="ead:processinfo"/>
+<!--
+  <xsl:template match="ead:dsc">
+    <xsl:if test="ead:head">
+      <a name="container_list">
+        <h3>Container List</h3>
+      </a>
+    </xsl:if>
+  </xsl:template>
+-->
+   
+<xsl:template match="ead:processinfo"/>
 
   <!--
     Helper template to allow the use of IDs from EAD.
@@ -139,7 +150,6 @@
   <!-- Handle top level did. -->
   <xsl:template name="archdesc_did">
     <xsl:if test="not(ead:container[@parent])">
-      <h3>Collection Guide</h3>
       <xsl:for-each select="*">
         <p>
           <xsl:apply-templates select="."/>
@@ -168,16 +178,26 @@
     </xsl:if>
   </xsl:template>
 
+
   <xsl:template name="flat_container">
+    <xsl:variable name="pbmId">
+      <xsl:apply-templates select="ead:container"/>    
+      <xsl:value-of select="@box"/>_<xsl:value-of select="@folder"/>
+    </xsl:variable>
     <dd>
       <a>
         <xsl:attribute name="href">
+          http://maccready-dev.library.caltech.edu/islandora/search/mods_identifier_ms:(PBM_<xsl:copy-of select="$pbmId"/>)
+          <!--
           <xsl:copy-of select="php:function('islandora_manuscript_build_flat_query_url', ead:container)"/>
-        </xsl:attribute>
+          -->
+	</xsl:attribute>
         <xsl:apply-templates select="ead:container[1]" mode="flat_text"/>
       </a>
     </dd>
   </xsl:template>
+
+
   <xsl:template match="ead:container" mode="flat_text">
     <xsl:value-of select="@type"/>
     <xsl:text> </xsl:text>
@@ -190,7 +210,8 @@
       <xsl:copy-of select="$sibling_content"/>
     </xsl:if>
   </xsl:template>
-
+ 
+  
   <xsl:template match="ead:container" mode="parent">
     <xsl:variable name="containers" select="//ead:container"/>
     <dd>
@@ -217,6 +238,8 @@
   </xsl:template>
 
   <xsl:template match="text()" mode="did_list"/>
+
+
   <!-- end of did/definition list stuff -->
 
   <xsl:template match="ead:p">
