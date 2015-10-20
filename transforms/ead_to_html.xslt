@@ -180,14 +180,17 @@
 
 
   <xsl:template name="flat_container">
-    <xsl:variable name="pbmId">
+    <xsl:variable name="folder_value">
       <xsl:apply-templates select="ead:container"/>    
-      <xsl:value-of select="@box"/>_<xsl:value-of select="@folder"/>
+      <xsl:value-of select="@folder"/>
+    </xsl:variable>
+    <xsl:variable name="pbm_id">
+      <xsl:value-of select="concat(substring($folder_value,1,1),'_',substring($folder_value,3,1),'_',substring($folder_value,4))"/>
     </xsl:variable>
     <dd>
       <a>
         <xsl:attribute name="href">
-          http://maccready-dev.library.caltech.edu/islandora/search/mods_identifier_ms:(PBM_<xsl:copy-of select="$pbmId"/>)
+          http://maccready-dev.library.caltech.edu/islandora/search/mods_identifier_ms:(PBM_<xsl:copy-of select="$pbm_id"/>)
           <!--
           <xsl:copy-of select="php:function('islandora_manuscript_build_flat_query_url', ead:container)"/>
           -->
