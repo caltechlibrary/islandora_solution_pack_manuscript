@@ -179,6 +179,10 @@
   </xsl:template>
 
 
+<!-- The creation of folder links was originally done via a php fucntion call,
+     commented out below.  Here we do it in a much simpler way, by parsing the
+     "type=folder" attribute of the container element.  NOTE: FIXME: This 
+     won't work if there are more than 9 series or 9 boxes!    -->
   <xsl:template name="flat_container">
     <xsl:variable name="folder_value">
       <xsl:apply-templates select="ead:container"/>    
