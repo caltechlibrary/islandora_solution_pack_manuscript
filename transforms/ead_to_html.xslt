@@ -17,77 +17,96 @@
   </xsl:template>
 
   <xsl:template match="ead:accessrestrict">
-    <xsl:if test="ead:head">
-      <h3>
-        <xsl:apply-templates select="ead:head"/>
-      </h3>
-    </xsl:if>
-    <xsl:apply-templates select="ead:p"/>
-  </xsl:template>
+    <fieldset class="ead-component collapsible collapsed ead-component-accessrestrict">
+    <legend><span class="fieldset-legend">Access</span></legend>
+      <div class="fieldset-wrapper">
+        <xsl:apply-templates select="ead:p"/>
+      </div>
+    </fieldset>
+  </xsl:template>  
 
   <xsl:template match="ead:userestrict">
-    <xsl:if test="ead:head">
-      <h3>
-        <xsl:apply-templates select="ead:head"/>
-      </h3>
-    </xsl:if>
-    <xsl:apply-templates select="ead:p"/>
+    <fieldset class="ead-component collapsible collapsed ead-component-userestrict">
+    <legend><span class="fieldset-legend">Publication Rights</span></legend>
+      <div class="fieldset-wrapper">
+        <xsl:apply-templates select="ead:p"/>
+      </div>
+    </fieldset>
   </xsl:template>
 
   <xsl:template match="ead:prefercite">
-    <xsl:if test="ead:head">
-      <h3>
-        <xsl:apply-templates select="ead:head"/>
-      </h3>
-    </xsl:if>
-    <xsl:apply-templates select="ead:p"/>
+    <fieldset class="ead-component collapsible collapsed ead-component-prefercite">
+    <legend><span class="fieldset-legend">Preferred Citation</span></legend>
+      <div class="fieldset-wrapper">
+        <xsl:apply-templates select="ead:p"/>
+      </div>
+    </fieldset>
   </xsl:template>
 
   <xsl:template match="ead:acqinfo">
-    <xsl:if test="ead:head">
-      <h3>
-        <xsl:apply-templates select="ead:head"/>
-      </h3>
-    </xsl:if>
-    <xsl:apply-templates select="ead:p"/>
+    <fieldset class="ead-component collapsible collapsed ead-component-acqinfo">
+    <legend><span class="fieldset-legend">Acquisition Information</span></legend>
+      <div class="fieldset-wrapper">
+        <xsl:apply-templates select="ead:p"/>
+      </div>
+    </fieldset>
   </xsl:template>
 
+<!-- FIXME - This element is not transferring into the HTML!  -->
   <xsl:template match="ead:processinfo">
-    <xsl:if test="ead:head">
-      <h3>
-        <xsl:apply-templates select="ead:head"/>
-      </h3>
-    </xsl:if>
-    <xsl:apply-templates select="ead:p"/>
+    <fieldset class="ead-component collapsible collapsed ead-component-processinfo">
+    <legend><span class="fieldset-legend">Processing History</span></legend>
+      <div class="fieldset-wrapper">
+        <xsl:apply-templates select="ead:p"/>
+      </div>
+    </fieldset>
   </xsl:template>
 
   <xsl:template match="ead:bioghist">
-    <xsl:if test="ead:head">
-      <h3>
-        <xsl:apply-templates select="ead:head"/>
-      </h3>
-    </xsl:if>
-    <xsl:apply-templates select="ead:p"/>
+    <fieldset class="ead-component collapsible collapsed ead-component-bioghist">
+    <legend><span class="fieldset-legend">Biography</span></legend>
+      <div class="fieldset-wrapper">
+        <xsl:apply-templates select="ead:p"/>
+      </div>
+    </fieldset>
   </xsl:template>
 
   <xsl:template match="ead:scopecontent">
-    <xsl:if test="ead:head">
-      <h3>
-        <xsl:apply-templates select="ead:head"/>
-      </h3>
-    </xsl:if>
-    <xsl:apply-templates select="ead:p"/>
+    <fieldset class="ead-component collapsible collapsed ead-component-scopecontent">
+    <legend><span class="fieldset-legend">Scope and Content</span></legend>
+      <div class="fieldset-wrapper">
+        <xsl:apply-templates select="ead:p"/>
+      </div>
+    </fieldset>
   </xsl:template>
 
-<!--
-  <xsl:template match="ead:dsc">
-    <xsl:if test="ead:head">
-      <a name="container_list">
-        <h3>Container List</h3>
-      </a>
-    </xsl:if>
+  <xsl:template match="ead:relatedmaterial">
+    <fieldset class="ead-component collapsible collapsed ead-component-relatedmaterial">
+    <legend><span class="fieldset-legend">Related Material</span></legend>
+      <div class="fieldset-wrapper">
+        <xsl:apply-templates select="ead:p"/>
+      </div>
+    </fieldset>
   </xsl:template>
--->
+
+<!-- FIXME: Need separate templates for outer and inner instances of this element -->
+  <xsl:template match="ead:controlaccess">
+    <fieldset class="ead-component collapsible collapsed ead-component-controlaccess">
+    <legend><span class="fieldset-legend">Indexing Terms</span></legend>
+      <div class="fieldset-wrapper">
+        <xsl:apply-templates select="ead:p"/>
+      </div>
+    </fieldset>
+  </xsl:template>
+
+<!-- This is just to handle the "Container List" heading --> 
+  <xsl:template match="ead:dsc/ead:head">
+      <h3>
+        Container List
+      </h3>
+<!--    <xsl:apply-templates/>   -->
+  </xsl:template>
+
    
 <xsl:template match="ead:processinfo"/>
 
@@ -150,11 +169,16 @@
   <!-- Handle top level did. -->
   <xsl:template name="archdesc_did">
     <xsl:if test="not(ead:container[@parent])">
-      <xsl:for-each select="*">
+      <fieldset class="ead-component collapsible collapsed ead-component-did">
+      <legend><span class="fieldset-legend">Descriptive Summary</span></legend>
+      <div class="fieldset-wrapper">
+	<xsl:for-each select="*">
         <p>
           <xsl:apply-templates select="."/>
         </p>
       </xsl:for-each>
+      </div>
+      </fieldset>
     </xsl:if>
   </xsl:template>
 
