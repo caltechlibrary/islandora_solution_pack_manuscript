@@ -11,7 +11,7 @@
 
   <xsl:template match="/">
     <div class="ead">
-      <h3>Collection Guide</h3>
+      <h3>Collection Guide Overview</h3>
       <xsl:apply-templates select="//ead:archdesc"/>
     </div>
   </xsl:template>
@@ -160,9 +160,9 @@
       <xsl:call-template name="container"/>
     </xsl:variable>
     <xsl:if test="normalize-space($contents)">
-      <dl>
+ <!--     <dl>    This is not necessary - introduces an extraneious blank line-->
         <xsl:copy-of select="$contents"/>
-      </dl>
+<!--      </dl>   -->
     </xsl:if>
   </xsl:template>
 
