@@ -205,15 +205,23 @@
 
 <!-- The creation of folder links was originally done via a php fucntion call,
      commented out below.  Here we do it in a much simpler way, by parsing the
-     "type=folder" attribute of the container element.  NOTE: FIXME: This 
-     won't work if there are more than 9 series or 9 boxes!    -->
+     box and folder type attributes of the container element.  NOTE: FIXME: This 
+     won't work if folder precedes box!    -->
   <xsl:template name="flat_container">
+    <xsl:variable name="box_value">
+      <xsl:apply-templates select="ead:container[1]"/> 
+      <xsl:if test="@type='box'">
+        <xsl:value-of select="@type"/>
+      </xsl:if>
+    </xsl:variable>
     <xsl:variable name="folder_value">
-      <xsl:apply-templates select="ead:container"/>    
-      <xsl:value-of select="@folder"/>
+      <xsl:apply-templates select="ead:container[2]"/>
+      <xsl:if test="@type='folder'">
+        <xsl:value-of select="@type"/>
+      </xsl:if>
     </xsl:variable>
     <xsl:variable name="pbm_id">
-      <xsl:value-of select="concat(substring($folder_value,1,1),'_',substring($folder_value,3,1),'_',substring($folder_value,4))"/>
+      <xsl:value-of select="concat(substring-before($box_value,'.'), '_', substring-after($box_value,'.'), '_', $folder_value)"/>
     </xsl:variable>
     <dd>
       <a>
