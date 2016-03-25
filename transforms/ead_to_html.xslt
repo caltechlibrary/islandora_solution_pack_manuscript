@@ -226,7 +226,7 @@
     <dd>
       <a>
         <xsl:attribute name="href">
-          http://maccready-dev.library.caltech.edu/islandora/search/mods_identifier_ms%3A%28PBM_<xsl:copy-of select="$pbm_id"/>%29
+          http://maccready-dev.library.caltech.edu/islandora/search/mods_identifier_local_ms%3A%28PBM_<xsl:copy-of select="$pbm_id"/>%29 
           <!--
           <xsl:copy-of select="php:function('islandora_manuscript_build_flat_query_url', ead:container)"/>
           -->
