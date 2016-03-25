@@ -4,6 +4,13 @@
 
 Allows users to create and view Manuscripts. Including the upload of TEI and XSLT and CSS documents. Users will be able to view transformed manuscript TEI (via the upload XSLT) side by side with the image(s) of the manuscript (via the Open Seadragon viewer). Users will also be able to browse Manuscripts via Box / Folder hierarchies as defined by their record in an associated finding aid.
 
+Notes on Caltech changes to the original discoverygarden module:
+* Caltech is only using the EAD display and linking functionality of this module.  We are not using the side-by-side TEI display.
+* Caltech assumes a more rigid link structure, in that there will always be series, box, and folder in the container list item.
+* Caltech has changed the XSLT that transforms the EAD for display in HTML, as follows:
+* Original linking method, using a call out to PHP, has been discarded.  Instead links are constructed directly in the XSLT and are actually Islandora searches on the item unique identifiers which look like `XXX_series-number_box-number_folder-number.`  
+* The display of the front matter is collapsed, so that the container list is more visible.
+
 ### Key Features
 
 * Ability to upload TEI
